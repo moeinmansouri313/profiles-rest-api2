@@ -4,7 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 
 
-class UserprofileManager(BaseUserManager):
+class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
 
     def create_user(self, email, name, password=None):
@@ -20,14 +20,14 @@ class UserprofileManager(BaseUserManager):
 
     def create_superuser(self, email, name, password):
         """Create and save a new suoeruser with given details"""
-        user - self.create_user(email, name, password)
+        user = self.create_user(email, name, password)
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
         return user
 
 
-class UserProfiles(AbstractBaseUser, PermissionsMixin):
+class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Database model for users in system"""
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
@@ -47,6 +47,6 @@ class UserProfiles(AbstractBaseUser, PermissionsMixin):
         """Retrive short name of user"""
         return self.name
 
-    def__str__(self):
-    """Return string representation of our user"""
-    return self.email
+    def __str__(self):
+        """Return string representation of our user"""
+        return self.email
